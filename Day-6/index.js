@@ -257,7 +257,7 @@ function firstNFibonacciPrime(num) {
   for (let i = 2; true; i++) {
     const numbers = fibonacci[i - 1] + fibonacci[i - 2];
     fibonacci.push(numbers);
-    if (isPrime(Number(numbers))) {
+    if (isPrime(numbers)) {
       prime.push(numbers);
       if (prime.length > num - 1) break;
     }
@@ -265,9 +265,9 @@ function firstNFibonacciPrime(num) {
   return prime;
 }
 function isPrime(N) {
-  if (N < 2) return false;
-  for (let i = 2; i <= Math.sqrt(N); i++) {
-    if (N % i === 0) return false;
+  if (N < 2n) return false;
+  for (let i = 2n; i * i <= N; i++) {
+    if (N % i === 0n) return false;
   }
   return true;
 }
