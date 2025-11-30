@@ -10,19 +10,19 @@
 // Input: N = 84
 // Output: [2, 2, 3, 7]
 
-// function primeFactorization(num) {
-//   const prime = [];
-//   let factor = 2;
-//   while (factor <= Math.sqrt(num)) {
-//     while (num % factor === 0) {
-//       prime.push(factor);
-//       num = num / factor;
-//     }
-//     factor++;
-//   }
-//   if (num > 2) prime.push(num);
-//   return prime;
-// }
+function primeFactorization(num) {
+  const prime = [];
+  let factor = 2;
+  while (factor <= Math.sqrt(num)) {
+    while (num % factor === 0) {
+      prime.push(factor);
+      num = num / factor;
+    }
+    factor++;
+  }
+  if (num > 2) prime.push(num);
+  return prime;
+}
 
 // or
 
@@ -45,7 +45,7 @@ function primeFactorization(num) {
   return prime;
 }
 
-console.log(primeFactorization(84));
+primeFactorization(84)
 
 // 2. Factorization in Exponent Form
 // Input: N = 360
