@@ -45,8 +45,77 @@ function primeFactorization(num) {
   return prime;
 }
 
-primeFactorization(84)
+primeFactorization(84);
 
 // 2. Factorization in Exponent Form
 // Input: N = 360
 // Output: "2^3 × 3^2 × 5^1"
+
+function factorizationInExponent(num) {
+  const factors = {};
+  while (num % 2 === 0) {
+    factors[2] = (factors[2] || 0) + 1;
+    num = num / 2;
+  }
+  let divider = 3;
+  while (num % divider === 0) {
+    factors[divider] = (factors[divider] || 0) + 1;
+    num = num / divider;
+  }
+  divider++;
+  if (num > 2) factors[num] = (factors[num] || 0) + 1;
+  let output = "";
+  Object.keys(factors).forEach((key, i) => {
+    output +=
+      `${key}^${factors[key]}` +
+      (i !== Object.keys(factors).length - 1 ? " X " : "");
+  });
+  return output;
+}
+factorizationInExponent(360);
+
+// 3. Distinct Prime Factor Count
+// Input: N = 100
+// Output: Distinct Prime Factors = 2 (Because 100 → 2, 5)
+
+function distinctFactorization(num) {
+  const factors = {};
+  while (num % 2 === 0) {
+    factors[2] = (factors[2] || 0) + 1;
+    num = num / 2;
+  }
+  let divider = 3;
+  while (num % divider === 0) {
+    factors[divider] = (factors[divider] || 0) + 1;
+    num = num / divider;
+  }
+  divider++;
+  if (num > 2) factors[num] = (factors[num] || 0) + 1;
+
+  return Object.keys(factors).length;
+}
+distinctFactorization(100);
+
+// 4. Check if a Number Is a Powerful Number
+// A number is powerful if every prime factor appears with an exponent ≥ 2.
+
+// Input: N = 36
+// Output: Powerful Number (36 → 2² × 3² → all exponents ≥ 2)
+
+function powerfulNumber(num) {
+  const factors = {};
+  while (num % 2 === 0) {
+    factors[2] = (factors[2] || 0) + 1;
+    num = num / 2;
+  }
+  let divider = 3;
+  while (num % divider === 0) {
+    factors[divider] = (factors[divider] || 0) + 1;
+    num = num / divider;
+  }
+  divider++;
+  if (num > 2) factors[num] = (factors[num] || 0) + 1;
+
+  return Math.min(...Object.values(factors)) >= 2;
+}
+powerfulNumber(36);
