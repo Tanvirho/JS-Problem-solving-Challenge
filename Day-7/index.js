@@ -39,8 +39,8 @@ function primeFactorization(num) {
       prime.push(factor);
       num = num / factor;
     }
+    factor += 2;
   }
-  factor += 2;
   if (num > 2) prime.push(num);
   return prime;
 }
@@ -113,9 +113,62 @@ function powerfulNumber(num) {
     factors[divider] = (factors[divider] || 0) + 1;
     num = num / divider;
   }
-  divider++;
+  divider += 2;
   if (num > 2) factors[num] = (factors[num] || 0) + 1;
 
   return Math.min(...Object.values(factors)) >= 2;
 }
 powerfulNumber(36);
+
+// 5. Find the Product of All Distinct Prime Factors
+// Input: N = 150
+// Output: Product = 2 × 3 × 5 = 30
+
+function allDistinctPrimeFactors(num) {
+  const primeFactors = {};
+  while (num % 2 === 0) {
+    primeFactors[2] = (primeFactors[2] || 0) + 1;
+    num = num / 2;
+  }
+  let divider = 3;
+  while (divider <= Math.sqrt(num)) {
+    while (num % divider === 0) {
+      primeFactors[divider] = (primeFactors[divider] || 0) + 1;
+      num = num / divider;
+    }
+    divider += 2;
+  }
+  if (num > 2) primeFactors[num] = (primeFactors[num] || 0) + 1;
+  const keys = Object.keys(primeFactors);
+  let answer = 1;
+  for (number of keys) {
+    answer *= number;
+  }
+  return answer;
+}
+allDistinctPrimeFactors(150);
+
+// 6. Check if a Number Is a Square-Free Number
+// A number is square-free if none of its prime factors repeat.
+
+// Input: N = 30
+// Output: Square-Free Number (2 × 3 × 5 → no repeats)
+
+function squareFreeNumber(num) {
+  const primeFactors = {};
+  while (num % 2 === 0) {
+    primeFactors[2] = (primeFactors[2] || 0) + 1;
+    num = num / 2;
+  }
+  let divider = 3;
+  while (divider <= Math.sqrt(num)) {
+    while (num % divider === 0) {
+      primeFactors[divider] = (primeFactors[divider] || 0) + 1;
+      num = num / divider;
+    }
+    divider += 2;
+  }
+  if (num > 2) primeFactors[num] = (primeFactors[num] || 0) + 1;
+  return Math.max(...Object.values(primeFactors)) === 1;
+}
+squareFreeNumber(30);
