@@ -227,11 +227,62 @@ smithNumber(666);
 // Input: N = 14
 // Output: Not Ugly (Contains 7)
 
+function uglyNumber(num) {
+  if (num <= 0) return false;
+  if (num === 1) return true;
+  if (num > 5 && isPrime(num)) return false;
+  const factors = {};
+  while (num % 2 === 0) {
+    factors[2] = (factors[2] || 0) + 1;
+    num = num / 2;
+  }
+  let divider = 3;
+  while (divider <= Math.sqrt(num)) {
+    while (num % divider === 0) {
+      if (divider > 5) return false;
+      factors[divider] = (factors[divider] || 0) + 1;
+      num = num / divider;
+    }
+    divider += 2;
+  }
+  if (num > 5) return false;
+  if (num > 2) factors[num] = (factors[num] || 0) + 1;
+  return true;
+}
+function isPrime(N) {
+  if (N < 2) return false;
+  for (let i = 2; i <= Math.sqrt(N); i++) {
+    if (N % i === 0) return false;
+  }
+  return true;
+}
+
+// or
+
+function uglyNumber(num) {
+  if (num <= 0) return false;
+  while (num % 2 === 0) num /= 2;
+  while (num % 3 === 0) num /= 3;
+  while (num % 5 === 0) num /= 5;
+  return num === 1;
+}
+uglyNumber(18);
+
 // 9. Check if a Number Is a Kaprekar Number
 // Square the number → split → sum should give the original number.
 
 // Input: N = 45
 // Output: Kaprekar Number (45² = 2025 → 20 + 25 = 45)
+
+function kaprekarNumber(num) {
+  const square = num * num;
+  const string = square.toString();
+  const part_1 = Number(string.slice(0, string.length / 2));
+  const part_2 = Number(string.slice(string.length / 2, string.length));
+  const sum = part_1 + part_2;
+  return sum === num;
+}
+kaprekarNumber(45);
 
 // 10. Check if a Number Is a Happy Number
 // Repeatedly replace the number with the sum of squares of its digits. If it becomes 1, it is Happy.
@@ -246,3 +297,8 @@ smithNumber(666);
 // 12. Swap Variable without using third variable
 // Input: a = 5, b = 6
 // Output: a = 6, b = 5
+
+function swapVariable(a, b) {
+  return { a: b, b: a };
+}
+console.log(swapVariable(5, 6));
