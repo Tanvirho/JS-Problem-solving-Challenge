@@ -352,7 +352,7 @@ function baseConversion(num, base1, base2) {
     return Number(digits2.join(""));
   }
 }
-console.log(baseConversion(101101, 2, 10));
+baseConversion(101101, 2, 10);
 
 // 12. Swap Variable without using third variable
 // Input: a = 5, b = 6
