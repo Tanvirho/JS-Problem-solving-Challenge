@@ -290,9 +290,72 @@ kaprekarNumber(45);
 // Input: N = 19
 // Output: Happy Number
 
+function happyNumber(num) {
+  let current = splice(num);
+  // Magic 4 Rule:
+  // If a number is NOT Happy, it will eventually enter a loop that contains 4.
+  // So we just check: is it 1 (Happy)? Or did we hit 4 (Not Happy)?
+  while (current !== 1 && current !== 4) {
+    current = splice(current);
+  }
+  return current === 1;
+}
+function splice(N = 4) {
+  let sum = 0;
+  while (N > 0) {
+    const digit = N % 10;
+    N = Math.floor(N / 10);
+    sum += digit * digit;
+  }
+  return sum;
+}
+happyNumber(19);
+
 // 11. Number Base Conversion (Any Base to Any Base)
 // Input: Number = "101101", From Base = 2, To Base = 10
 // Output: 45
+
+function baseConversion(num, base1, base2) {
+  const digits = [];
+  const digits2 = [];
+  let decimal = 0;
+  while (num > 0) {
+    const digit = num % 10;
+    num = Math.floor(num / 10);
+    digits.push(digit);
+  }
+  for (let i = 0; i < digits.length; i++) {
+    decimal += digits[i] * base1 ** i;
+  }
+  if (base2 === 10) return decimal;
+  if (base2 === 0) return 0;
+
+  if (base2 > 10) {
+  }
+
+  if (base2 === 16) {
+    while (decimal > 0) {
+      const remainder = decimal % base2;
+      decimal = Math.floor(decimal / base2);
+      if (remainder === 10) digits2.unshift("A");
+      else if (remainder === 11) digits2.unshift("B");
+      else if (remainder === 12) digits2.unshift("C");
+      else if (remainder === 13) digits2.unshift("D");
+      else if (remainder === 14) digits2.unshift("E");
+      else if (remainder === 15) digits2.unshift("F");
+      else digits2.unshift(remainder);
+    }
+    return digits2.join("");
+  } else {
+    while (decimal > 0) {
+      const remainder = decimal % base2;
+      decimal = Math.floor(decimal / base2);
+      digits2.unshift(remainder);
+    }
+    return Number(digits2.join(""));
+  }
+}
+console.log(baseConversion(101101, 2, 10));
 
 // 12. Swap Variable without using third variable
 // Input: a = 5, b = 6
@@ -301,4 +364,4 @@ kaprekarNumber(45);
 function swapVariable(a, b) {
   return { a: b, b: a };
 }
-console.log(swapVariable(5, 6));
+swapVariable(5, 6);
