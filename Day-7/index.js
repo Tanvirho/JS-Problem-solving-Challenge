@@ -330,9 +330,6 @@ function baseConversion(num, base1, base2) {
   if (base2 === 10) return decimal;
   if (base2 === 0) return 0;
 
-  if (base2 > 10) {
-  }
-
   if (base2 === 16) {
     while (decimal > 0) {
       const remainder = decimal % base2;
