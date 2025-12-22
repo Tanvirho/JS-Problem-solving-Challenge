@@ -81,3 +81,38 @@ function mostFrequent(str) {
   return maxChar;
 }
 mostFrequent("success");
+
+// 5. Check if Two Strings Are Anagrams (Without Sorting)
+// Input: "listen", "silent"
+// Output: Anagram ✨ Use character frequency comparison — no .sort().
+
+function areAnagram(str1, str2) {
+  if (str1.length !== str2.length) return false;
+  const frequency = {};
+  for (let i = 0; i < str1.length; i++) {
+    frequency[str1[i]] = (frequency[str1[i]] || 0) + 1;
+  }
+  for (let i = 0; i < str2.length; i++) {
+    const char = str2[i];
+    if (!frequency[char]) return false;
+    frequency[char]--;
+  }
+  return true;
+}
+areAnagram("listen", "silent");
+
+// 6. Find the First Non-Repeating Character
+// Input: "aabbcddeff"
+// Output: c ✨ Requires 2-pass algorithm: first count → then find first unique.
+
+function nonRepeatingCharacter(str) {
+  const frequency = {};
+  for (let i = 0; i < str.length; i++) {
+    frequency[str[i]] = (frequency[str[i]] || 0) + 1;
+  }
+  for (let i = 0; i < str.length; i++) {
+    if(frequency[str[i]] === 1) return str[i]
+  }
+  return null
+}
+console.log(nonRepeatingCharacter("aabbcddeff"))
