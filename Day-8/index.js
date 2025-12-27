@@ -111,8 +111,91 @@ function nonRepeatingCharacter(str) {
     frequency[str[i]] = (frequency[str[i]] || 0) + 1;
   }
   for (let i = 0; i < str.length; i++) {
-    if(frequency[str[i]] === 1) return str[i]
+    if (frequency[str[i]] === 1) return str[i];
   }
-  return null
+  return null;
 }
-console.log(nonRepeatingCharacter("aabbcddeff"))
+nonRepeatingCharacter("aabbcddeff");
+
+// 7. Remove All Duplicate Characters (Keep First Occurrence)
+// Input: "programming"
+// Output: "progamin" ✨ Use a visited set + build new string.
+
+function removeDuplicate(str) {
+  const set = {};
+  for (let i = 0; i < str.length; i++) {
+    set[str[i]] = (set[str[i]] || 0) + 1;
+  }
+  const key = Object.keys(set);
+  let string = "";
+  for (const char of key) {
+    string += char;
+  }
+  return string;
+}
+removeDuplicate("programming");
+
+// 8. Check if a String Contains Only Alphabets (No Regex)
+// Input: "HelloWorld123"
+// Output: False ✨ Use ASCII ranges manually.
+
+function isContainsAlphabets(str) {
+  if (str.length === 0) return false;
+  for (let i = 0; i < str.length; i++) {
+    let asciiCode = str.charCodeAt(i);
+    let isAlphabet =
+      (asciiCode >= 65 && asciiCode <= 90) ||
+      (asciiCode >= 97 && asciiCode <= 122);
+    if (!isAlphabet) {
+      return false;
+    }
+  }
+  return true;
+}
+isContainsAlphabets("HelloWorld123");
+
+// 9. Reverse Only the Words in a Sentence
+// Input: "I love coding"
+// Output: "coding love I" ✨ Split manually or build reverser yourself.
+
+function reverseWord(str) {
+  // let set = str.split(' ')
+  //  let reverseWorld = "";
+  // for (let i = set.length - 1; i >= 0; i--) {
+  //   reverseWorld += set[i]
+  //   if(i > 0){
+  //     reverseWorld += " "
+  //   }
+  // }
+  // return reverseWorld;
+
+  let word = "";
+  let result = "";
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] === " ") {
+      result = word + (result ? " " : "") + result;
+      word = "";
+    } else {
+      word += str[i];
+    }
+  }
+  result = word + (result ? " " : "") + result;
+  return result;
+}
+reverseWord("I love coding");
+
+// 4️⃣ Find the Longest Word in a Sentence
+// Input: "coding is beautiful"
+// Output: "beautiful" ✨ Manual scanning + longest tracking.
+
+// 5️⃣ Count the Number of Words (Manually Without split)
+// Input: "  hi   there  world "
+// Output: 3 words ✨ Detect transitions from space → non-space using logic.
+
+// 6️⃣ Find All Substrings of a String (No Built-ins)
+// Input: "abc"
+// Output: a, ab, abc, b, bc, c ✨ Nested loops + substring construction.
+
+// 7️⃣ Compress a String (Basic Run-Length Encoding)
+// Input: "aaabbccccd"
+// Output: "a3b2c4d1" ✨ Count consecutive characters and build encoded output.
