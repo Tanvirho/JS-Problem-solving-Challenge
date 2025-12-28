@@ -184,9 +184,37 @@ function reverseWord(str) {
 }
 reverseWord("I love coding");
 
-// 4️⃣ Find the Longest Word in a Sentence
+// 10. Find the Longest Word in a Sentence
 // Input: "coding is beautiful"
 // Output: "beautiful" ✨ Manual scanning + longest tracking.
+
+function longestWord(str) {
+  // let words = str.split(" ")
+  // let longest = "";
+  // for(let word of words){
+  //   if (word.length > longest.length){
+  //     longest = word
+  //   }
+  // }
+
+  let word = "";
+  let longest = "";
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] === " ") {
+      if (word.length > longest.length) {
+        longest = word;
+      }
+      word = "";
+    } else {
+      word += str[i];
+    }
+  }
+  if (word.length > longest.length) {
+    longest = word;
+  }
+  return longest;
+}
+longestWord("coding is beautiful");
 
 // 5️⃣ Count the Number of Words (Manually Without split)
 // Input: "  hi   there  world "
