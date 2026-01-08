@@ -220,10 +220,53 @@ longestWord("coding is beautiful");
 // Input: "  hi   there  world "
 // Output: 3 words ✨ Detect transitions from space → non-space using logic.
 
+function countWords(str) {
+  let word = "";
+  let arr = [];
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] === " ") {
+      if (word !== "") {
+        arr.push(word);
+        word = "";
+      }
+    } else {
+      word += str[i];
+    }
+  }
+  return arr.length + " words";
+}
+countWords("  hi   there  world ");
+
 // 6️⃣ Find All Substrings of a String (No Built-ins)
 // Input: "abc"
 // Output: a, ab, abc, b, bc, c ✨ Nested loops + substring construction.
 
+function allSubstring(str) {
+  let result = [];
+  for (let i = 0; i < str.length; i++) {
+    let subString = "";
+    for (let j = i; j < str.length; j++) {
+      subString += str[j];
+      result.push(subString);
+    }
+  }
+  return result;
+}
+allSubstring("abc");
+
 // 7️⃣ Compress a String (Basic Run-Length Encoding)
 // Input: "aaabbccccd"
 // Output: "a3b2c4d1" ✨ Count consecutive characters and build encoded output.
+
+function compressString(str) {
+  const frequency = {};
+  let result = "";
+  for (let i = 0; i < str.length; i++) {
+    frequency[str[i]] = (frequency[str[i]] || 0) + 1;
+  }
+  for (const char in frequency) {
+    result += char + frequency[char];
+  }
+  return result;
+}
+compressString("aaabbccccd");
