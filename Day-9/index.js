@@ -132,9 +132,89 @@ removeDuplicateWords("this is is a test test string");
 // 4️⃣ Find the Longest Palindromic Substring (Brute Force Allowed)
 // Input: "babad"
 // Output: "bab" or "aba" ✨ Check all substrings; teaches brute-force reasoning.
+
+function longestPalindromeBruteForce(str) {
+  let longestSubstr = "";
+  for (let i = 0; i < str.length; i++) {
+    for (let j = i; j < str.length; j++) {
+      const subStr = str.slice(i, j + 1);
+      if (isPalindrome(subStr)) {
+        if (longestSubstr.length < subStr.length) {
+          longestSubstr = subStr;
+        }
+      }
+    }
+  }
+  return longestSubstr;
+}
+function isPalindrome(s) {
+  let left = 0;
+  let right = s.length - 1;
+  while (left < right) {
+    if (s[left] !== s[right]) return false;
+    left++;
+    right--;
+  }
+  return true;
+}
+longestPalindromeBruteForce("babad");
+
 // 5️⃣ Find All Anagram Pairs in an Array of Strings
 // Input: ["cat", "tac", "act", "dog"]
 // Output: ["cat","tac","act"]
+
+function findAnagrams(arr) {
+  const sortedMap = {};
+  const result = [];
+  for (const word of arr) {
+    const sorted = word.split("").sort().join("");
+    if (sortedMap[sorted]) {
+      sortedMap[sorted].push(word);
+    } else {
+      sortedMap[sorted] = [word];
+    }
+  }
+  for (const key in sortedMap) {
+    if (sortedMap[key].length > 1) {
+      result.push(...sortedMap[key]);
+    }
+  }
+  return result;
+}
+findAnagrams(["cat", "tac", "act", "dog"]);
+
 // 6️⃣ Find the Longest Substring Without Repeating Characters (Sliding Window)
 // Input: "abcabcbb"
 // Output: "abc" ✨ Introduction to sliding windows, hash maps, and window shrinking logic.
+
+function longestUniqueSubstring(str) {
+  let start = 0;
+  let maxSubstr = "";
+  let charIndexMap = new Map(); // Hash Map to store character and its index
+
+  for (let end = 0; end < str.length; end++) {
+    const currentChar = str[end];
+
+    // If character is already in the map AND is inside our current window
+    if (charIndexMap.has(currentChar) && charIndexMap.get(currentChar) >= start) {
+      // 1. Window Shrinking Logic:
+      // Move the start pointer to right after the previous instance of this character
+      start = charIndexMap.get(currentChar) + 1;
+    }
+
+    // 2. Update the character's latest index in the Hash Map
+    charIndexMap.set(currentChar, end);
+
+    // 3. Update the longest substring found so far
+    // (end - start + 1) is the size of the current unique window
+    if ((end - start + 1) > maxSubstr.length) {
+      maxSubstr = str.substring(start, end + 1);
+    }
+  }
+
+  return maxSubstr;
+}
+
+longestUniqueSubstring("abcabcbb"); // Output: "abc"
+longestUniqueSubstring("pwwkew");   // Output: "wke"
+longestUniqueSubstring("bbbbb");    // Output: "b"
